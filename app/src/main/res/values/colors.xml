@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBackground">#edfff7</color>
+    <color name="colorLightGray">#fafafa</color>
+    <color name="colorOrangeText">#ef9040</color>
+    <color name="colorDarkBlue">#3f61a8</color>
+    <color name="colorLightBlue">#4d6fb2</color>
+    <color name="actionbar_background">#4d6fb2</color>
+    <color name="actionbar_text_color">#edfff7</color>
+    <color name="ripple">#385696</color>
+
+</resources>

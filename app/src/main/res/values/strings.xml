@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Svetoch Tula</string>
+
+    <string name="main_text_authorization">Авторизация</string>
+    <string name="main_editText_email">E-mail</string>
+    <string name="main_editText_password">Пароль</string>
+    <string name="main_button_sign_in">Войти</string>
+    <string name="main_button_registration">Регистрация</string>
+
+    <string name="reg_text_registration">Регистрация</string>
+    <string name="reg_editText_name">Имя</string>
+    <string name="reg_editText_surname">Фамилия</string>
+    <string name="reg_editText_phone">Телефон</string>
+    <string name="reg_editText_email">Email</string>
+    <string name="reg_editText_password">Пароль</string>
+    <string name="reg_editText_repeat_password">Повторие пароль</string>
+    <string name="reg_button_registration">Зарегистрироваться</string>
+
+    <string name="menu_text_hello">Привет!</string>
+
+
+</resources>
