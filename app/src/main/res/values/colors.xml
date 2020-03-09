@@ -8,5 +8,7 @@
     <color name="actionbar_background">#4d6fb2</color>
     <color name="actionbar_text_color">#edfff7</color>
     <color name="ripple">#385696</color>
+    <color name="redToast">#ff0000</color>
+    <color name="greenToast">#38d100</color>
 
 </resources>
