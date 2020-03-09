@@ -71,43 +71,43 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(TextUtils.isEmpty(name.getText().toString())) {
-                    checkingForErrors(StringConst.error_input_name);
+                    showToast(StringConst.error_input_name, false);
                     //Snackbar.make(root, StringConst.error_input_name, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(surname.getText().toString())) {
-                    checkingForErrors(StringConst.error_input_surname);
+                    showToast(StringConst.error_input_surname, false);
                     //Snackbar.make(root, StringConst.error_input_surname, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(phone.getText().toString())) {
-                    checkingForErrors(StringConst.error_input_phone);
+                    showToast(StringConst.error_input_phone, false);
                     //Snackbar.make(root, StringConst.error_input_phone, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(email.getText().toString())) {
-                    checkingForErrors(StringConst.error_input_email);
+                    showToast(StringConst.error_input_email, false);
                     //Snackbar.make(root, StringConst.error_input_email, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(pass.getText().toString().length() < 6) {
-                    checkingForErrors(StringConst.error_input_password);
+                    showToast(StringConst.error_input_password, false);
                     //Snackbar.make(root, StringConst.error_input_password, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(rep_pass.getText().toString())) {
-                    checkingForErrors(StringConst.error_no_input_repeat_password);
+                    showToast(StringConst.error_no_input_repeat_password, false);
                     //Snackbar.make(root, StringConst.error_no_input_repeat_password, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(!pass.getText().toString().equals(rep_pass.getText().toString())) {
-                    checkingForErrors(StringConst.error_input_repeat_password);
+                    showToast(StringConst.error_input_repeat_password, false);
                     //Snackbar.make(root, StringConst.error_input_repeat_password, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
@@ -129,7 +129,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-
+                                            showToast(StringConst.add_user_to_BD, true);
                                             //Snackbar.make(root, StringConst.add_user_to_BD, Snackbar.LENGTH_SHORT).show();
 
                                             TimerTask task = new TimerTask() {
@@ -148,19 +148,33 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void checkingForErrors(String text_error) {
+    private void showToast(String text_message, boolean error_or_true) {
         LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.failed_toast,
-                (ViewGroup) findViewById(R.id.failed_toast_container));
+        if (error_or_true) {
+            View layout = inflater.inflate(R.layout.successful_toast,
+                    (ViewGroup) findViewById(R.id.successful_toast_container));
 
-        TextView text = (TextView) layout.findViewById(R.id.text);
-        text.setText(text_error);
+            TextView text = (TextView) layout.findViewById(R.id.text_true);
+            text.setText(text_message);
 
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.TOP, 0, 155);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.TOP, 0, 155);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        } else {
+            View layout = inflater.inflate(R.layout.failed_toast,
+                    (ViewGroup) findViewById(R.id.failed_toast_container));
+
+            TextView text = (TextView) layout.findViewById(R.id.text_error);
+            text.setText(text_message);
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.TOP, 0, 155);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        }
     }
 
     //логика работы стрелочки "Назад"
