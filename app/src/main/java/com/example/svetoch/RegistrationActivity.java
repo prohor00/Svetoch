@@ -6,10 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.svetoch.Const.StringConst;
 import com.example.svetoch.Models.User;
@@ -66,37 +71,44 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(TextUtils.isEmpty(name.getText().toString())) {
-                    Snackbar.make(root, StringConst.error_input_name, Snackbar.LENGTH_SHORT).show();
+                    showToast(StringConst.error_input_name, false);
+                    //Snackbar.make(root, StringConst.error_input_name, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(surname.getText().toString())) {
-                    Snackbar.make(root, StringConst.error_input_surname, Snackbar.LENGTH_SHORT).show();
+                    showToast(StringConst.error_input_surname, false);
+                    //Snackbar.make(root, StringConst.error_input_surname, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(phone.getText().toString())) {
-                    Snackbar.make(root, StringConst.error_input_phone, Snackbar.LENGTH_SHORT).show();
+                    showToast(StringConst.error_input_phone, false);
+                    //Snackbar.make(root, StringConst.error_input_phone, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(email.getText().toString())) {
-                    Snackbar.make(root, StringConst.error_input_email, Snackbar.LENGTH_SHORT).show();
+                    showToast(StringConst.error_input_email, false);
+                    //Snackbar.make(root, StringConst.error_input_email, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(pass.getText().toString().length() < 6) {
-                    Snackbar.make(root, StringConst.error_input_password, Snackbar.LENGTH_SHORT).show();
+                    showToast(StringConst.error_input_password, false);
+                    //Snackbar.make(root, StringConst.error_input_password, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(TextUtils.isEmpty(rep_pass.getText().toString())) {
-                    Snackbar.make(root, StringConst.error_no_input_repeat_password, Snackbar.LENGTH_SHORT).show();
+                    showToast(StringConst.error_no_input_repeat_password, false);
+                    //Snackbar.make(root, StringConst.error_no_input_repeat_password, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(!pass.getText().toString().equals(rep_pass.getText().toString())) {
-                    Snackbar.make(root, StringConst.error_input_repeat_password, Snackbar.LENGTH_SHORT).show();
+                    showToast(StringConst.error_input_repeat_password, false);
+                    //Snackbar.make(root, StringConst.error_input_repeat_password, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -117,7 +129,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Snackbar.make(root, StringConst.add_user_to_BD, Snackbar.LENGTH_SHORT).show();
+                                            showToast(StringConst.add_user_to_BD, true);
+                                            //Snackbar.make(root, StringConst.add_user_to_BD, Snackbar.LENGTH_SHORT).show();
 
                                             TimerTask task = new TimerTask() {
                                                 public void run() {
@@ -133,6 +146,35 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
             }
         });
+    }
+
+    private void showToast(String text_message, boolean error_or_true) {
+        LayoutInflater inflater = getLayoutInflater();
+        if (error_or_true) {
+            View layout = inflater.inflate(R.layout.successful_toast,
+                    (ViewGroup) findViewById(R.id.successful_toast_container));
+
+            TextView text = (TextView) layout.findViewById(R.id.text_true);
+            text.setText(text_message);
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.TOP, 0, 155);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        } else {
+            View layout = inflater.inflate(R.layout.failed_toast,
+                    (ViewGroup) findViewById(R.id.failed_toast_container));
+
+            TextView text = (TextView) layout.findViewById(R.id.text_error);
+            text.setText(text_message);
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.TOP, 0, 155);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.setView(layout);
+            toast.show();
+        }
     }
 
     //логика работы стрелочки "Назад"
